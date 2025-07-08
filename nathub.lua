@@ -1,4 +1,5 @@
-premium = true
+premium = true 
+
 repeat wait() until game:IsLoaded() and game:FindFirstChild("CoreGui") and pcall(function() return game.CoreGui end)
 local _function = {
     ["getid"] = function()
@@ -42,10 +43,13 @@ local _function = {
 }
 local script_id, game_name = _function.getid(), _function.gamename()
 if script_id then
+    -- Bước 2: Tự tạo biến 'script_key' mà script cuối cùng yêu cầu
+    script_key = script_id 
+
     game.StarterGui:SetCore(
         "SendNotification",
         {
-            Title = "NatHub Loaded!",
+            Title = "NatHub Loaded! (Premium Bypass)",
             Text = game_name .. " Script Loaded!",
             Icon = "rbxassetid://99764942615873",
             Duration = 5
@@ -56,7 +60,7 @@ if script_id then
         local auth_status = auth(script_id)
         repeat task.wait() until auth_status.validated
     end
-    script_key = script_key
+    
     if premium then premium = true; is_premium = true end
     _function.load("https://api.luarmor.net/files/v4/loaders/" .. script_id .. ".lua")
 end
